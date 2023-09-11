@@ -21,6 +21,9 @@ class LoginPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 50),
+
+              //welcome back
+              Text('Welcome Back you\'ve been missed!'),
     );
   }
 }
