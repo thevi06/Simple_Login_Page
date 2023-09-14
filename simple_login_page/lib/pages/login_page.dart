@@ -32,6 +32,13 @@ class LoginPage extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 25),
+
+                //username textfield
+              MyTextField(
+                controller: usernameController,
+                hintText: 'Username',
+                obscureText: false,
+              ),
     );
   }
 }
