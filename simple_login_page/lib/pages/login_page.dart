@@ -23,7 +23,13 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 50),
 
               //welcome back
-              Text('Welcome Back you\'ve been missed!'),
+              Text(
+                'Welcome Back you\'ve been missed!'
+                style: TextStyle(
+                  color: Colors.grey[700],
+                  fontSize: 16,
+                ),
+                ),
     );
   }
 }
