@@ -39,6 +39,8 @@ class LoginPage extends StatelessWidget {
                 hintText: 'Username',
                 obscureText: false,
               ),
+
+              const SizedBox(height: 10),
     );
   }
 }
