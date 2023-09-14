@@ -48,6 +48,8 @@ class LoginPage extends StatelessWidget {
                 hintText: 'Password',
                 obscureText: true,
               ),
+
+              const SizedBox(height: 10),
     );
   }
 }
