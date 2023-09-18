@@ -13,3 +13,18 @@ class MyButton extends StatelessWidget {
     //     builder: (context) => const SecondPage(),
     //   ));
     // });
+
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.success,
+      animType: AnimType.rightSlide,
+      title: 'Login Successful',
+      desc: 'Here We Go!!!',
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => const SecondPage(),
+        ));
+      },
+    ).show();
+  }
