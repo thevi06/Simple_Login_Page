@@ -28,3 +28,12 @@ class MyButton extends StatelessWidget {
       },
     ).show();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 25),
+      child: ElevatedButton(
+        onPressed: () {
+          _showSuccessDialog(context); // Show the success dialog
+        },
