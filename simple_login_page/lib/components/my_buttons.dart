@@ -44,3 +44,16 @@ class MyButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
+        child: Container(
+          width: double.infinity, // Stretch the button width
+          child: const Center(
+            child: Text(
+              'Sign In',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ),
