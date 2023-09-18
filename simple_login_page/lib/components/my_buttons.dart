@@ -37,3 +37,10 @@ class MyButton extends StatelessWidget {
         onPressed: () {
           _showSuccessDialog(context); // Show the success dialog
         },
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 25),
+          primary: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
