@@ -109,6 +109,10 @@ class LoginPage extends StatelessWidget {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // google button
+                  SquareTile(imagePath: 'lib/images/google.png'),
+
+                  SizedBox(width: 25),
     );
   }
 }
