@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_login_page/components/my_buttons.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -68,7 +69,9 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 10),
 
               //sign in button
-              
+              MyButton(
+                onTap: SignUserIn,
+              ),
     );
   }
 }
