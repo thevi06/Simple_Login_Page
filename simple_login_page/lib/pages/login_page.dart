@@ -86,6 +86,13 @@ class LoginPage extends StatelessWidget {
                         color: Colors.grey[400],
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Text(
+                        'Or Continue With',
+                        style: TextStyle(color: Colors.grey[700]),
+                      ),
+                    ),
     );
   }
 }
