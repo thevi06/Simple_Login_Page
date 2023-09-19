@@ -113,6 +113,11 @@ class LoginPage extends StatelessWidget {
                   SquareTile(imagePath: 'lib/images/google.png'),
 
                   SizedBox(width: 25),
+
+                  // apple button
+                  SquareTile(imagePath: 'lib/images/apple.png')
+                ],
+              ),
     );
   }
 }
