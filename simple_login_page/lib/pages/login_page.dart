@@ -129,6 +129,14 @@ class LoginPage extends StatelessWidget {
                     'Not a member?',
                     style: TextStyle(color: Colors.grey[700]),
                   ),
+                  const SizedBox(width: 4),
+                  const Text(
+                    'Redister Now',
+                    style: TextStyle(
+                        color: Colors.blue, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              )
     );
   }
 }
