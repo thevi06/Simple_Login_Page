@@ -120,6 +120,15 @@ class LoginPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 50),
+
+              //not a member? register now
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Not a member?',
+                    style: TextStyle(color: Colors.grey[700]),
+                  ),
     );
   }
 }
