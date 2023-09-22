@@ -47,3 +47,18 @@ class _DrawingRoomScreenState extends State<SecondPage> {
                 historyDrawingPoints = List.of(drawingPoints);
               });
             },
+            onPanUpdate: (details) {
+              setState(() {
+                if (currentDrawingPoint == null) return;
+
+                currentDrawingPoint = currentDrawingPoint?.copyWith(
+                  offsets: currentDrawingPoint!.offsets
+                    ..add(details.localPosition),
+                );
+                drawingPoints.last = currentDrawingPoint!;
+                historyDrawingPoints = List.of(drawingPoints);
+              });
+            },
+            onPanEnd: (_) {
+              currentDrawingPoint = null;
+            },
