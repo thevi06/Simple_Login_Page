@@ -16,7 +16,7 @@ class _DrawingRoomScreenState extends State<SecondPage> {
     Colors.green,
     Colors.brown,
   ];
-  
+
   var historyDrawingPoints = <DrawingPoint>[];
   var drawingPoints = <DrawingPoint>[];
 
@@ -24,3 +24,21 @@ class _DrawingRoomScreenState extends State<SecondPage> {
   var selectedWidth = 2.0;
 
   DrawingPoint? currentDrawingPoint;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          /// Canvas
+          GestureDetector(
+            onPanStart: (details) {
+              setState(() {
+                currentDrawingPoint = DrawingPoint(
+                  id: DateTime.now().microsecondsSinceEpoch,
+                  offsets: [
+                    details.localPosition,
+                  ],
+                  color: selectedColor,
+                  width: selectedWidth,
+                );
