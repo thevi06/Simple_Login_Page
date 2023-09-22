@@ -62,3 +62,13 @@ class _DrawingRoomScreenState extends State<SecondPage> {
             onPanEnd: (_) {
               currentDrawingPoint = null;
             },
+            child: CustomPaint(
+              painter: DrawingPainter(
+                drawingPoints: drawingPoints,
+              ),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+              ),
+            ),
+          ),
