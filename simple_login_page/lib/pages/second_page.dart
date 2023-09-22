@@ -6,3 +6,13 @@ class SecondPage extends StatefulWidget {
   @override
   State<SecondPage> createState() => _DrawingRoomScreenState();
 }
+
+class _DrawingRoomScreenState extends State<SecondPage> {
+  var avaiableColor = [
+    Colors.black,
+    Colors.red,
+    Colors.amber,
+    Colors.blue,
+    Colors.green,
+    Colors.brown,
+  ];
