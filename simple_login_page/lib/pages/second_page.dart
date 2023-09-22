@@ -42,3 +42,8 @@ class _DrawingRoomScreenState extends State<SecondPage> {
                   color: selectedColor,
                   width: selectedWidth,
                 );
+                if (currentDrawingPoint == null) return;
+                drawingPoints.add(currentDrawingPoint!);
+                historyDrawingPoints = List.of(drawingPoints);
+              });
+            },
