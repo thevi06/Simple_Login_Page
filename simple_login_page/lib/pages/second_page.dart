@@ -16,3 +16,11 @@ class _DrawingRoomScreenState extends State<SecondPage> {
     Colors.green,
     Colors.brown,
   ];
+  
+  var historyDrawingPoints = <DrawingPoint>[];
+  var drawingPoints = <DrawingPoint>[];
+
+  var selectedColor = Colors.black;
+  var selectedWidth = 2.0;
+
+  DrawingPoint? currentDrawingPoint;
