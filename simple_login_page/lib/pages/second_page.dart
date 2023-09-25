@@ -100,3 +100,15 @@ class _DrawingRoomScreenState extends State<SecondPage> {
                         color: avaiableColor[index],
                         shape: BoxShape.circle,
                       ),
+                      foregroundDecoration: BoxDecoration(
+                        border: selectedColor == avaiableColor[index]
+                            ? Border.all(color: AppColor.primaryColor, width: 4)
+                            : null,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
