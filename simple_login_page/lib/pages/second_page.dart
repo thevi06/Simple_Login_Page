@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_login_page/components/app_color.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({super.key});
