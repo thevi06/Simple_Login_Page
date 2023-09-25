@@ -86,3 +86,10 @@ class _DrawingRoomScreenState extends State<SecondPage> {
                 separatorBuilder: (_, __) {
                   return const SizedBox(width: 8);
                 },
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedColor = avaiableColor[index];
+                      });
+                    },
