@@ -80,3 +80,9 @@ class _DrawingRoomScreenState extends State<SecondPage> {
             right: 16,
             child: SizedBox(
               height: 80,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: avaiableColor.length,
+                separatorBuilder: (_, __) {
+                  return const SizedBox(width: 8);
+                },
