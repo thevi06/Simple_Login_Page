@@ -72,3 +72,11 @@ class _DrawingRoomScreenState extends State<SecondPage> {
               ),
             ),
           ),
+
+          /// color pallet
+          Positioned(
+            top: MediaQuery.of(context).padding.top,
+            left: 16,
+            right: 16,
+            child: SizedBox(
+              height: 80,
