@@ -93,3 +93,10 @@ class _DrawingRoomScreenState extends State<SecondPage> {
                         selectedColor = avaiableColor[index];
                       });
                     },
+                    child: Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: avaiableColor[index],
+                        shape: BoxShape.circle,
+                      ),
