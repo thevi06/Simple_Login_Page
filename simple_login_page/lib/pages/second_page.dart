@@ -121,3 +121,17 @@ class _DrawingRoomScreenState extends State<SecondPage> {
             bottom: 150,
             child: RotatedBox(
               quarterTurns: 3, // 270 degree
+              child: Slider(
+                value: selectedWidth,
+                min: 1,
+                max: 20,
+                onChanged: (value) {
+                  setState(() {
+                    selectedWidth = value;
+                  });
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
