@@ -135,3 +135,9 @@ class _DrawingRoomScreenState extends State<SecondPage> {
           ),
         ],
       ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            heroTag: "Undo",
+            onPressed: () {
