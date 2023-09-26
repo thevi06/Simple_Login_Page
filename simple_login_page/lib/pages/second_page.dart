@@ -154,3 +154,17 @@ class _DrawingRoomScreenState extends State<SecondPage> {
             heroTag: "Redo",
             onPressed: () {
               setState(() {
+                if (drawingPoints.length < historyDrawingPoints.length) {
+                  // 6 length 7
+                  final index = drawingPoints.length;
+                  drawingPoints.add(historyDrawingPoints[index]);
+                }
+              });
+            },
+            child: const Icon(Icons.redo),
+          ),
+        ],
+      ),
+    );
+  }
+}
