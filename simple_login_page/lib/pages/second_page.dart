@@ -141,3 +141,11 @@ class _DrawingRoomScreenState extends State<SecondPage> {
           FloatingActionButton(
             heroTag: "Undo",
             onPressed: () {
+              if (drawingPoints.isNotEmpty && historyDrawingPoints.isNotEmpty) {
+                setState(() {
+                  drawingPoints.removeLast();
+                });
+              }
+            },
+            child: const Icon(Icons.undo),
+          ),
