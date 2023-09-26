@@ -149,3 +149,8 @@ class _DrawingRoomScreenState extends State<SecondPage> {
             },
             child: const Icon(Icons.undo),
           ),
+          const SizedBox(width: 16),
+          FloatingActionButton(
+            heroTag: "Redo",
+            onPressed: () {
+              setState(() {
