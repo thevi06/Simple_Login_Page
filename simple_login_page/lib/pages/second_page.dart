@@ -113,3 +113,11 @@ class _DrawingRoomScreenState extends State<SecondPage> {
               ),
             ),
           ),
+
+          /// pencil size
+          Positioned(
+            top: MediaQuery.of(context).padding.top + 80,
+            right: 0,
+            bottom: 150,
+            child: RotatedBox(
+              quarterTurns: 3, // 270 degree
