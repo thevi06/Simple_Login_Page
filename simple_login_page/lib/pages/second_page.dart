@@ -173,3 +173,12 @@ class DrawingPainter extends CustomPainter {
   final List<DrawingPoint> drawingPoints;
 
   DrawingPainter({required this.drawingPoints});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    for (var drawingPoint in drawingPoints) {
+      final paint = Paint()
+        ..color = drawingPoint.color
+        ..isAntiAlias = true
+        ..strokeWidth = drawingPoint.width
+        ..strokeCap = StrokeCap.round;
