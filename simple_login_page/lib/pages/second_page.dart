@@ -168,3 +168,8 @@ class _DrawingRoomScreenState extends State<SecondPage> {
     );
   }
 }
+
+class DrawingPainter extends CustomPainter {
+  final List<DrawingPoint> drawingPoints;
+
+  DrawingPainter({required this.drawingPoints});
