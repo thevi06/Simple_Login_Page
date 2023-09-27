@@ -182,3 +182,6 @@ class DrawingPainter extends CustomPainter {
         ..isAntiAlias = true
         ..strokeWidth = drawingPoint.width
         ..strokeCap = StrokeCap.round;
+
+        for (var i = 0; i < drawingPoint.offsets.length; i++) {
+        var notLastOffset = i != drawingPoint.offsets.length - 1;
