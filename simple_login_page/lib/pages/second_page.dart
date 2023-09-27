@@ -190,4 +190,9 @@ class DrawingPainter extends CustomPainter {
           final current = drawingPoint.offsets[i];
           final next = drawingPoint.offsets[i + 1];
           canvas.drawLine(current, next, paint);
+        } else {
+          /// we do nothing
         }
+      }
+    }
+  }
