@@ -185,3 +185,9 @@ class DrawingPainter extends CustomPainter {
 
         for (var i = 0; i < drawingPoint.offsets.length; i++) {
         var notLastOffset = i != drawingPoint.offsets.length - 1;
+
+        if (notLastOffset) {
+          final current = drawingPoint.offsets[i];
+          final next = drawingPoint.offsets[i + 1];
+          canvas.drawLine(current, next, paint);
+        }
