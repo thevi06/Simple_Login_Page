@@ -10,3 +10,8 @@ class MyTextField extends StatelessWidget {
       required this.controller,
       required this.hintText,
       required this.obscureText});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),    
