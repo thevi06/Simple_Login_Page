@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:simple_login_page/pages/second_page.dart';
 
 class MyButton extends StatelessWidget {
   final Function()? onTap;
