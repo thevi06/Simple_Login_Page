@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:simple_login_page/components/my_buttons.dart';
+import 'package:simple_login_page/components/my_textfield.dart';
 import 'package:simple_login_page/components/square_tile.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+
+  //text editing controller
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
