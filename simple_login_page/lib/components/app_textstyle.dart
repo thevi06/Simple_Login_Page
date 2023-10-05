@@ -14,3 +14,8 @@ class AppTextStyle {
     fontSize: 45,
     fontWeight: FontWeight.bold,
   );
+  TextStyle displaySmall = TextStyle(
+    color: AppColor.blackGrey,
+    fontSize: 36,
+    fontWeight: FontWeight.bold,
+  );
