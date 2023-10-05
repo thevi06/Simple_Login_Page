@@ -34,3 +34,8 @@ class AppTextStyle {
     fontSize: 22,
     fontWeight: FontWeight.bold,
   );
+  TextStyle titleLarge = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: AppColor.blackGrey,
+    fontSize: 22,
+  );
