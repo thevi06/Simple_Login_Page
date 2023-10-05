@@ -9,3 +9,8 @@ class AppTextStyle {
     fontSize: 57,
     fontWeight: FontWeight.bold,
   );
+  TextStyle displayMedium = TextStyle(
+    color: AppColor.blackGrey,
+    fontSize: 45,
+    fontWeight: FontWeight.bold,
+  );
