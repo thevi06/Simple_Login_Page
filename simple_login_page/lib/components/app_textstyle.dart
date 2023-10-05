@@ -19,3 +19,8 @@ class AppTextStyle {
     fontSize: 36,
     fontWeight: FontWeight.bold,
   );
+  TextStyle headlineLarge = TextStyle(
+    color: AppColor.blackGrey,
+    fontSize: 32,
+    fontWeight: FontWeight.bold,
+  );
