@@ -39,3 +39,8 @@ class AppTextStyle {
     color: AppColor.blackGrey,
     fontSize: 22,
   );
+  TextStyle titleMedium = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: AppColor.blackGrey,
+    fontSize: 18,
+  );
