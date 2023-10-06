@@ -48,3 +48,7 @@ class AppTextStyle {
     color: AppColor.blackGrey,
     fontSize: 14,
   );
+  TextStyle labelLarge = TextStyle(
+    color: AppColor.blackGrey,
+    fontSize: 14,
+  );
