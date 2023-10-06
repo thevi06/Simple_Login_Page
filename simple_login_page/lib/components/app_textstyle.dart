@@ -44,3 +44,7 @@ class AppTextStyle {
     color: AppColor.blackGrey,
     fontSize: 18,
   );
+  TextStyle titleSmall = TextStyle(
+    color: AppColor.blackGrey,
+    fontSize: 14,
+  );
