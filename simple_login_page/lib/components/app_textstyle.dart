@@ -52,3 +52,7 @@ class AppTextStyle {
     color: AppColor.blackGrey,
     fontSize: 14,
   );
+  TextStyle labelMedium = TextStyle(
+    color: AppColor.blackGrey,
+    fontSize: 12,
+  );
