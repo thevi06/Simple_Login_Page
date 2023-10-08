@@ -56,3 +56,7 @@ class AppTextStyle {
     color: AppColor.blackGrey,
     fontSize: 12,
   );
+  TextStyle labelSmall = TextStyle(
+    color: AppColor.blackGrey,
+    fontSize: 11,
+  );
