@@ -60,3 +60,8 @@ class AppTextStyle {
     color: AppColor.blackGrey,
     fontSize: 11,
   );
+  TextStyle bodyLarge = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: AppColor.blackGrey,
+    fontSize: 16,
+  );
