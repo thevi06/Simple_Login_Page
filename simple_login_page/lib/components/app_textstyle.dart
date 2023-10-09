@@ -129,3 +129,19 @@ Widget textThemeSample(BuildContext context) {
           "labelSmall",
           style: Theme.of(context).textTheme.labelSmall,
         ),
+        Text(
+          "bodyLarge",
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+        Text(
+          "bodyMedium",
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+        Text(
+          "bodySmall",
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+      ],
+    ),
+  );
+}
