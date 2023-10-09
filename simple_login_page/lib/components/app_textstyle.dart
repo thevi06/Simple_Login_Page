@@ -85,3 +85,11 @@ Widget textThemeSample(BuildContext context) {
           "displayLarge",
           style: Theme.of(context).textTheme.displayLarge,
         ),
+        Text(
+          "displayMedium",
+          style: Theme.of(context).textTheme.displayMedium,
+        ),
+        Text(
+          "displaySmall",
+          style: Theme.of(context).textTheme.displaySmall,
+        ),
