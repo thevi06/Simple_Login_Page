@@ -74,3 +74,14 @@ class AppTextStyle {
     fontSize: 12,
   );
 }
+
+Widget textThemeSample(BuildContext context) {
+  return Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "displayLarge",
+          style: Theme.of(context).textTheme.displayLarge,
+        ),
