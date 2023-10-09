@@ -117,3 +117,15 @@ Widget textThemeSample(BuildContext context) {
           "titleSmall",
           style: Theme.of(context).textTheme.titleSmall,
         ),
+        Text(
+          "labelLarge",
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
+        Text(
+          "labelMedium",
+          style: Theme.of(context).textTheme.labelMedium,
+        ),
+        Text(
+          "labelSmall",
+          style: Theme.of(context).textTheme.labelSmall,
+        ),
