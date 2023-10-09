@@ -65,3 +65,7 @@ class AppTextStyle {
     color: AppColor.blackGrey,
     fontSize: 16,
   );
+  TextStyle bodyMedium = TextStyle(
+    color: AppColor.blackGrey,
+    fontSize: 14,
+  );
