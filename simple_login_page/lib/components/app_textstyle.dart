@@ -105,3 +105,15 @@ Widget textThemeSample(BuildContext context) {
           "headlineSmall",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
+        Text(
+          "titleLarge",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        Text(
+          "titleMedium",
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        Text(
+          "titleSmall",
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
