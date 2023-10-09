@@ -34,7 +34,7 @@ class LoginPage extends StatelessWidget {
 
               //welcome back
               Text(
-                'Welcome Back you\'ve been missed!'
+                'Welcome Back you\'ve been missed!',
                 style: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 16,
