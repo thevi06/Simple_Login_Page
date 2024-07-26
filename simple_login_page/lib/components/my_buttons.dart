@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:simple_login_page/pages/second_page.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 class MyButton extends StatelessWidget {
   final Function()? onTap;
@@ -32,29 +32,22 @@ class MyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 25),
-      child: ElevatedButton(
-        onPressed: () {
-          _showSuccessDialog(context); // Show the success dialog
-        },
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 25),
-          primary: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(25),
+        margin: const EdgeInsets.symmetric(horizontal: 25),
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(8),
         ),
-        child: Container(
-          width: double.infinity, // Stretch the button width
-          child: const Center(
-            child: Text(
-              'Sign In',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
+        child: const Center(
+          child: Text(
+            "Sign In",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
             ),
           ),
         ),

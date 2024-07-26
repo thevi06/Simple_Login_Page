@@ -1,23 +1,33 @@
+// ignore_for_file: unused_import, unused_field, avoid_print
+
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:simple_login_page/pages/menu_page.dart';
+import 'dart:io';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart'; // Add this import
+
 import '../components/app_color.dart';
 import 'drawing_point.dart';
-import 'package:flutter/material.dart';
-import 'login_page.dart';
-import 'package:image_picker/image_picker.dart';
 
 class SecondPage extends StatefulWidget {
-  const SecondPage({Key? key}) : super(key: key);
+  final File? pickedImageFile;
+
+  const SecondPage({Key? key, this.pickedImageFile}) : super(key: key);
 
   @override
-  State<SecondPage> createState() => _DrawingRoomScreenState();
+  State<SecondPage> createState() => _SecondPageState();
 }
 
-class _DrawingRoomScreenState extends State<SecondPage> {
-  final ImagePicker _imagePicker = ImagePicker();
+class _SecondPageState extends State<SecondPage> {
   ui.Image? pickedImage;
+  final GlobalKey _globalKey = GlobalKey();
+  final TransformationController _controller = TransformationController();
+  bool _isImageLoaded = false;
 
-  var avaiableColor = [
+  var availableColor = [
     Colors.black,
     Colors.red,
     Colors.amber,
@@ -26,201 +36,194 @@ class _DrawingRoomScreenState extends State<SecondPage> {
     Colors.brown,
   ];
 
-  var historyDrawingPoints = <DrawingPoint>[];
   var drawingPoints = <DrawingPoint>[];
+  var undoneDrawingPoints = <DrawingPoint>[];
 
   var selectedColor = Colors.black;
   var selectedWidth = 2.0;
 
   DrawingPoint? currentDrawingPoint;
 
-  Future<void> _pickImage() async {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.pickedImageFile != null) {
+      _loadImage(widget.pickedImageFile!);
+    }
+  }
+
+  Future<void> _loadImage(File file) async {
     try {
-      final pickedFile =
-          await _imagePicker.pickImage(source: ImageSource.gallery);
-
-      if (pickedFile != null) {
-        final imageBytes = await pickedFile.readAsBytes();
-        final ByteData data =
-            ByteData.sublistView(imageBytes.buffer.asByteData());
-
-        pickedImage = await decodeImageFromList(Uint8List.view(data.buffer));
-
-        setState(() {
-          drawingPoints.clear();
-        });
-      }
+      final imageBytes = await file.readAsBytes();
+      final codec = await ui.instantiateImageCodec(imageBytes);
+      final frame = await codec.getNextFrame();
+      setState(() {
+        pickedImage = frame.image;
+        _isImageLoaded = true;
+        drawingPoints.clear();
+      });
     } catch (e) {
       print("Error loading image: $e");
     }
   }
 
+  Future<void> _saveToGallery() async {
+    try {
+      RenderRepaintBoundary boundary = _globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      ui.Image image = await boundary.toImage();
+      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      Uint8List pngBytes = byteData!.buffer.asUint8List();
+
+      final result = await ImageGallerySaver.saveImage(pngBytes);
+      print(result);
+    } catch (e) {
+      print("Error saving image: $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
-        );
-        return false;
-      },
-      child: Scaffold(
-        body: Stack(
-          children: [
-            // Canvas
-            GestureDetector(
-              onPanStart: (details) {
-                setState(() {
-                  currentDrawingPoint = DrawingPoint(
-                    id: DateTime.now().microsecondsSinceEpoch,
-                    offsets: [
-                      details.localPosition,
-                    ],
-                    color: selectedColor,
-                    width: selectedWidth,
-                  );
-
-                  if (currentDrawingPoint == null) return;
-                  drawingPoints.add(currentDrawingPoint!);
-                  historyDrawingPoints = List.of(drawingPoints);
-                });
-              },
-              onPanUpdate: (details) {
-                setState(() {
-                  if (currentDrawingPoint == null) return;
-
-                  currentDrawingPoint = currentDrawingPoint?.copyWith(
-                    offsets: currentDrawingPoint!.offsets
-                      ..add(details.localPosition),
-                  );
-                  drawingPoints.last = currentDrawingPoint!;
-                  historyDrawingPoints = List.of(drawingPoints);
-                });
-              },
-              onPanEnd: (_) {
-                currentDrawingPoint = null;
-              },
-              child: CustomPaint(
-                painter: DrawingPainter(
-                  drawingPoints: drawingPoints,
-                ),
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                ),
-              ),
-            ),
-
-            // color pallet
-            Positioned(
-              top: MediaQuery.of(context).padding.top,
-              left: 16,
-              right: 16,
-              child: SizedBox(
-                height: 80,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: avaiableColor.length,
-                  separatorBuilder: (_, __) {
-                    return const SizedBox(width: 8);
-                  },
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedColor = avaiableColor[index];
-                        });
-                      },
-                      child: Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          color: avaiableColor[index],
-                          shape: BoxShape.circle,
-                        ),
-                        foregroundDecoration: BoxDecoration(
-                          border: selectedColor == avaiableColor[index]
-                              ? Border.all(
-                                  color: AppColor.primaryColor, width: 4)
-                              : null,
-                          shape: BoxShape.circle,
-                        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Draw'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const MenuPage()),
+            );
+          },
+        ),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: RepaintBoundary(
+              key: _globalKey,
+              child: GestureDetector(
+                onPanStart: (details) {
+                  setState(() {
+                    drawingPoints.add(
+                      DrawingPoint(
+                        color: selectedColor,
+                        width: selectedWidth,
+                        offsets: [details.localPosition],
                       ),
                     );
-                  },
-                ),
-              ),
-            ),
-
-            // pencil size
-            Positioned(
-              top: MediaQuery.of(context).padding.top + 80,
-              right: 0,
-              bottom: 150,
-              child: RotatedBox(
-                quarterTurns: 3,
-                child: Slider(
-                  value: selectedWidth,
-                  min: 1,
-                  max: 20,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedWidth = value;
-                    });
-                  },
-                ),
-              ),
-            ),
-            if (pickedImage != null)
-              CustomPaint(
-                painter: ImagePainter(image: pickedImage!),
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                ),
-              ),
-          ],
-        ),
-
-        // Undo, Redo buttons
-        floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            FloatingActionButton(
-              heroTag: "Undo",
-              onPressed: () {
-                if (drawingPoints.isNotEmpty &&
-                    historyDrawingPoints.isNotEmpty) {
-                  setState(() {
-                    drawingPoints.removeLast();
+                    undoneDrawingPoints.clear();
                   });
-                }
-              },
-              child: const Icon(Icons.undo),
+                },
+                onPanUpdate: (details) {
+                  setState(() {
+                    drawingPoints.last.offsets.add(details.localPosition);
+                  });
+                },
+                onPanEnd: (details) {
+                  setState(() {
+                    undoneDrawingPoints.clear();
+                  });
+                },
+                child: Stack(
+                  children: [
+                    if (_isImageLoaded)
+                      Positioned.fill(
+                        child: CustomPaint(
+                          painter: ImagePainter(image: pickedImage!),
+                        ),
+                      ),
+                    Positioned.fill(
+                      child: CustomPaint(
+                        painter: DrawingPainter(drawingPoints: drawingPoints),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            const SizedBox(width: 16),
-            FloatingActionButton(
-              heroTag: "Redo",
-              onPressed: () {
-                setState(() {
-                  if (drawingPoints.length < historyDrawingPoints.length) {
-                    final index = drawingPoints.length;
-                    drawingPoints.add(historyDrawingPoints[index]);
-                  }
-                });
-              },
-              child: const Icon(Icons.redo),
-            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                icon: Icon(Icons.color_lens, color: selectedColor),
+                onPressed: _pickColor,
+              ),
+              IconButton(
+                icon: Icon(Icons.brush, size: selectedWidth),
+                onPressed: _pickWidth,
+              ),
+              IconButton(
+                icon: const Icon(Icons.undo),
+                onPressed: () {
+                  setState(() {
+                    if (drawingPoints.isNotEmpty) {
+                      undoneDrawingPoints.add(drawingPoints.removeLast());
+                    }
+                  });
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.redo),
+                onPressed: () {
+                  setState(() {
+                    if (undoneDrawingPoints.isNotEmpty) {
+                      drawingPoints.add(undoneDrawingPoints.removeLast());
+                    }
+                  });
+                },
+              ),
+              FloatingActionButton(
+                heroTag: "SaveToGallery",
+                onPressed: _saveToGallery,
+                tooltip: 'Save to Gallery',
+                child: const Icon(Icons.save),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 
-            // Import image button
-            const SizedBox(width: 16),
-            FloatingActionButton(
-              onPressed: _pickImage,
-              tooltip: 'Import Image',
-              child: const Icon(Icons.image),
-            ),
-          ],
+  void _pickColor() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Pick Color'),
+        content: BlockPicker(
+          pickerColor: selectedColor,
+          onColorChanged: (color) {
+            setState(() {
+              selectedColor = color;
+            });
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
+    );
+  }
+
+  void _pickWidth() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Pick Width'),
+        content: SingleChildScrollView(
+          child: Column(
+            children: List.generate(10, (index) {
+              return ListTile(
+                leading: Icon(Icons.brush, size: index.toDouble() + 1),
+                title: Text('Width ${(index + 1).toString()}'),
+                onTap: () {
+                  setState(() {
+                    selectedWidth = index.toDouble() + 1;
+                  });
+                  Navigator.of(context).pop();
+                },
+              );
+            }),
+          ),
         ),
       ),
     );
@@ -234,6 +237,10 @@ class DrawingPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    // Draw white background
+    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), Paint()..color = Colors.white);
+
+    // Draw the drawing points
     for (var drawingPoint in drawingPoints) {
       final paint = Paint()
         ..color = drawingPoint.color
